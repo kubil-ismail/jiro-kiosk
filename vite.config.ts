@@ -16,8 +16,8 @@ export default defineConfig({
     react(),
     tailwindcss(),
     legacy({
-      targets: ["chrome >= 64", "safari >= 12"],
-      modernPolyfills: true,
+      targets: ["> 1%", "last 2 versions", "Android >= 4.4", "Safari >= 10"],
+      renderModernChunks: false,
     }),
   ],
   resolve: {

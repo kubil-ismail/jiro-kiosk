@@ -1,7 +1,13 @@
-import { defineConfig } from 'vite'
-import path from 'path'
-import tailwindcss from '@tailwindcss/vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
+import legacy from "@vitejs/plugin-legacy";
+
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   plugins: [
@@ -9,11 +15,21 @@ export default defineConfig({
     // Tailwind is not being actively used – do not remove them
     react(),
     tailwindcss(),
+    legacy({
+      targets: ["defaults", "not IE 11"], // Example targets: adjust as needed
+      // For more specific old Android/Safari versions you might need:
+      // targets: ['> 1%', 'last 2 versions', 'Android >= 4.4', 'Safari >= 10'],
+      renderLegacyChunks: true, // default true
+      modernPolyfills: true, // default false, but useful to include
+    }),
   ],
   resolve: {
     alias: {
       // Alias @ to the src directory
-      '@': path.resolve(__dirname, './src'),
+      "@": path.resolve(__dirname, "./src"),
     },
   },
-})
+  build: {
+    target: "es2015", // minimum support ES2015
+  },
+});

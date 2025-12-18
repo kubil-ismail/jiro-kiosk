@@ -17,7 +17,6 @@ export default defineConfig({
     tailwindcss(),
     legacy({
       targets: ["> 1%", "last 2 versions", "Android >= 4.4", "Safari >= 10"],
-      renderModernChunks: false,
     }),
   ],
   resolve: {

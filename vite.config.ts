@@ -16,11 +16,8 @@ export default defineConfig({
     react(),
     tailwindcss(),
     legacy({
-      targets: ["defaults", "not IE 11"], // Example targets: adjust as needed
-      // For more specific old Android/Safari versions you might need:
-      // targets: ['> 1%', 'last 2 versions', 'Android >= 4.4', 'Safari >= 10'],
-      renderLegacyChunks: true, // default true
-      modernPolyfills: true, // default false, but useful to include
+      targets: ["chrome >= 64", "safari >= 12"],
+      modernPolyfills: true,
     }),
   ],
   resolve: {
@@ -28,8 +25,5 @@ export default defineConfig({
       // Alias @ to the src directory
       "@": path.resolve(__dirname, "./src"),
     },
-  },
-  build: {
-    target: "es2015", // minimum support ES2015
   },
 });

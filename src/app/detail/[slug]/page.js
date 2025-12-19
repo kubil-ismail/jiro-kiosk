@@ -22,7 +22,7 @@ function Page() {
   const router = useRouter();
 
   const [lastInteraction, setLastInteraction] = React.useState(Date.now());
-  const [secondsRemaining, setSecondsRemaining] = React.useState(60);
+  const [secondsRemaining, setSecondsRemaining] = React.useState(120);
 
   React.useEffect(() => {
     const interval = setInterval(() => {

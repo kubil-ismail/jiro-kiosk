@@ -181,12 +181,7 @@ function Page() {
           <Sidebar floors={floors} />
         </Grid>
         <Grid size={{ lg: 9.5, xs: 8 }}>
-          <Box
-            bgcolor="#fafafc"
-            height="100dvh"
-            p="30px"
-            sx={{ display: "flex", flexDirection: "column", gap: "20px" }}
-          >
+          <Box bgcolor="#fafafc" height="100dvh" p="30px">
             <SearchBar />
 
             <OfficeList />

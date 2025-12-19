@@ -1,10 +1,10 @@
-import { InputAdornment, TextField } from "@mui/material";
+import { Box, InputAdornment, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React from "react";
 
 function SearchBar() {
   return (
-    <>
+    <Box mb="20px">
       <TextField
         fullWidth
         placeholder="Search offices..."
@@ -18,7 +18,7 @@ function SearchBar() {
           },
         }}
       />
-    </>
+    </Box>
   );
 }
 

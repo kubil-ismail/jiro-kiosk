@@ -20,7 +20,7 @@ function OfficeList() {
                       }}
                     />
                   </Grid>
-                  <Grid size={10.5}>
+                  <Grid size={10.8}>
                     <Box px="20px">
                       <Typography variant="h6">Dana</Typography>
                       <Typography>Floor L1 - Room 110</Typography>

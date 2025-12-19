@@ -10,7 +10,7 @@ function Sidebar({ floors }) {
       overflow="hidden"
     >
       <Box display="flex" justifyContent="center" mt="20px">
-        <Box component="img" src="/logo.webp" width="150px" sx={{objectFit: 'contain'}} />
+        <Box component="img" src="/logo.webp" width="100px" height="100px" sx={{objectFit: 'contain'}} />
       </Box>
 
       <Box

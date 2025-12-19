@@ -175,13 +175,13 @@ const floors = [
 
 function Page() {
   return (
-    <Box height="100dvh" overflow="hidden">
+    <Box height="100vh" overflow="hidden">
       <Grid container>
         <Grid size={{ lg: 2.5, xs: 4 }}>
           <Sidebar floors={floors} />
         </Grid>
         <Grid size={{ lg: 9.5, xs: 8 }}>
-          <Box bgcolor="#fafafc" height="100dvh" p="30px">
+          <Box bgcolor="#fafafc" height="100vh" p="30px">
             <SearchBar />
 
             <OfficeList />

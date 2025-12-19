@@ -5,7 +5,7 @@ function Sidebar({ floors }) {
   return (
     <Box
       bgcolor="#fff"
-      height="100dvh"
+      height="100vh"
       borderRight="1px solid #f6f3f4"
       overflow="hidden"
     >
@@ -31,7 +31,7 @@ function Sidebar({ floors }) {
           mt="20px"
           p="20px"
           overflow="auto"
-          height="70dvh"
+          height="70vh"
           borderRadius="10px"
           className="scrollbar"
         >

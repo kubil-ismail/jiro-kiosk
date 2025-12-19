@@ -18,7 +18,7 @@ import { useRouter } from "next/navigation";
 
 const IDLE_TIMEOUT = 120000; // 1 minute
 
-function Page() {
+function Page({ handleClose }) {
   const router = useRouter();
 
   const [lastInteraction, setLastInteraction] = React.useState(Date.now());
@@ -50,21 +50,20 @@ function Page() {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Link href="/">
-          <Button
-            color="inherit"
-            variant="outlined"
-            size="large"
-            sx={{
-              borderRadius: "40px",
-              textTransform: "capitalize",
-              px: "30px",
-            }}
-            startIcon={<KeyboardBackspaceRoundedIcon />}
-          >
-            Back
-          </Button>
-        </Link>
+        <Button
+          color="inherit"
+          variant="outlined"
+          size="large"
+          sx={{
+            borderRadius: "40px",
+            textTransform: "capitalize",
+            px: "30px",
+          }}
+          onClick={handleClose}
+          startIcon={<KeyboardBackspaceRoundedIcon />}
+        >
+          Back
+        </Button>
 
         <Chip
           avatar={

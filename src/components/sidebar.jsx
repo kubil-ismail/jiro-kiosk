@@ -9,7 +9,7 @@ function Sidebar({ floors }) {
       borderRight="1px solid #f6f3f4"
       overflow="hidden"
     >
-      <Box display="flex" justifyContent="center" mt="20px">
+      <Box display="flex" justifyContent="center" mt="10px">
         <Box component="img" src="/logo.webp" width="100px" height="100px" sx={{objectFit: 'contain'}} />
       </Box>
 
@@ -18,7 +18,7 @@ function Sidebar({ floors }) {
           border: "1px solid",
           borderColor: "#fafafc",
           width: "40%",
-          my: "20px",
+          my: "5px",
           mx: "auto",
         }}
       />

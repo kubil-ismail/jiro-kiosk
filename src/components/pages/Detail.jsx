@@ -71,7 +71,7 @@ function Page({ handleClose }) {
               <AccessTimeIcon />
 
               <CircularProgress
-                size={23}
+                size={23.5}
                 sx={{
                   color: "green",
                   position: "absolute",

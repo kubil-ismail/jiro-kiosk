@@ -14,7 +14,18 @@ function OfficeList({ offices }) {
   const [openFullscreen, setOpenFullscreen] = React.useState(false);
 
   return (
-    <Box height="85vh" overflow="scroll" className="scrollbar">
+    <Box height="85vh" pb="50px" overflow="scroll" className="scrollbar">
+      {offices?.length === 0 && (
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          height="80vh"
+        >
+          <Typography align="center">No offices found</Typography>
+        </Box>
+      )}
+
       <Grid container spacing={1}>
         {offices?.map((item) => (
           <Grid size={{ lg: 6, xs: 12 }} key={item.id}>
@@ -29,7 +40,8 @@ function OfficeList({ offices }) {
                       sx={{
                         width: "64px",
                         height: "64px",
-                        backgroundColor: "gray",
+                        background: "#4bb8a2",
+                        borderRadius: "8px",
                       }}
                     />
                   </Grid>

@@ -20,7 +20,7 @@ const IDLE_TIMEOUT = 120000; // 2 minute
 function Page({ handleClose }) {
   const [secondsRemaining, setSecondsRemaining] = React.useState(120);
   // eslint-disable-next-line react-hooks/purity
-  const [lastInteraction, setLastInteraction] = React.useState(Date.now());
+  const [lastInteraction] = React.useState(Date.now());
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -37,8 +37,6 @@ function Page({ handleClose }) {
 
     return () => clearInterval(interval);
   }, [lastInteraction]);
-
-  console.log("secondsRemaining", secondsRemaining);
 
   const progress = (secondsRemaining / (IDLE_TIMEOUT / 1000)) * 100;
 
@@ -96,7 +94,7 @@ function Page({ handleClose }) {
                 sx={{
                   width: "100px",
                   height: "100px",
-                  background: "blue",
+                  background: "#4bb8a2",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",

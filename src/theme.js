@@ -3,6 +3,12 @@
 import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#4bb8a2",
+      contrastText: "#fff",
+    },
+  },
   typography: {
     fontFamily: "var(--font-roboto)",
     body1: {
@@ -34,7 +40,8 @@ const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: "8px",
+          borderRadius: "10px",
+          boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
         },
       },
     },

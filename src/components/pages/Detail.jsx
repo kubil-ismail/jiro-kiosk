@@ -16,29 +16,25 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-const IDLE_TIMEOUT = 120000; // 1 minute
+const IDLE_TIMEOUT = 120000; // 2 minute
 
 function Page({ handleClose }) {
-  const router = useRouter();
-
-  const [lastInteraction, setLastInteraction] = React.useState(Date.now());
   const [secondsRemaining, setSecondsRemaining] = React.useState(120);
 
   React.useEffect(() => {
     const interval = setInterval(() => {
-      const elapsed = Date.now() - lastInteraction;
-      const remaining = Math.max(0, Math.ceil((IDLE_TIMEOUT - elapsed) / 1000));
+      const remaining = Math.max(0, Math.ceil(IDLE_TIMEOUT / 1000));
       setSecondsRemaining(remaining);
 
       if (remaining === 0) {
-        router.replace("/");
+        handleClose();
 
         return () => clearInterval(interval);
       }
     }, 100);
 
     return () => clearInterval(interval);
-  }, [lastInteraction, IDLE_TIMEOUT]);
+  }, [IDLE_TIMEOUT]);
 
   const progress = (secondsRemaining / (IDLE_TIMEOUT / 1000)) * 100;
 

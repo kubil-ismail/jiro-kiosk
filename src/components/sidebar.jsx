@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 
-function Sidebar({ floors }) {
+function Sidebar({ floors, value, onChange }) {
   return (
     <Box
       bgcolor="#fff"
@@ -10,18 +10,14 @@ function Sidebar({ floors }) {
       overflow="hidden"
     >
       <Box display="flex" justifyContent="center" mt="10px">
-        <Box component="img" src="/logo.webp" width="100px" height="100px" sx={{objectFit: 'contain'}} />
+        <Box
+          component="img"
+          src="/logo.webp"
+          width="100px"
+          height="100px"
+          sx={{ objectFit: "contain" }}
+        />
       </Box>
-
-      <Box
-        sx={{
-          border: "1px solid",
-          borderColor: "#fafafc",
-          width: "40%",
-          my: "5px",
-          mx: "auto",
-        }}
-      />
 
       <Box px="20px">
         <Typography align="center">Select Floor</Typography>
@@ -37,10 +33,20 @@ function Sidebar({ floors }) {
         >
           {floors?.map((item) => (
             <Button
+              key={item}
               size="large"
-              color="inherit"
+              color={value === item ? "primary" : "inherit"}
               variant="contained"
-              sx={{ mb: "10px" }}
+              sx={{
+                mb: "10px",
+                textTransform: 'capitalize',
+                boxShadow:
+                  value === item ? "#fab83487 2.6px 2.6px 2.6px" : "unset",
+                "&:hover": {
+                  boxShadow: "#fab83487 2.6px 2.6px 2.6px",
+                },
+              }}
+              onClick={() => onChange(item)}
               fullWidth
             >
               {item}

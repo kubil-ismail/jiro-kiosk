@@ -23,6 +23,7 @@
     "react-is": "^19.2.3"
   },
   "devDependencies": {
+    "@types/node": "25.0.3",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.1.0"

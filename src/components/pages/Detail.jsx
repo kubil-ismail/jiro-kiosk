@@ -17,7 +17,7 @@ import { QRCodeSVG } from "qrcode.react";
 
 const IDLE_TIMEOUT = 120000; // 2 minute
 
-function Page({ handleClose }) {
+function Page({ handleClose, detail }) {
   const [secondsRemaining, setSecondsRemaining] = React.useState(120);
   // eslint-disable-next-line react-hooks/purity
   const [lastInteraction] = React.useState(Date.now());
@@ -94,25 +94,31 @@ function Page({ handleClose }) {
                 sx={{
                   width: "100px",
                   height: "100px",
-                  background: "#4bb8a2",
+                  background: detail?.background,
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
                   borderRadius: "15px",
+                  padding: "10px",
                 }}
               >
-                <Typography color="#fff">AC</Typography>
+                <Box
+                  component="img"
+                  sx={{ objectFit: "contain" }}
+                  src={detail?.logo}
+                  width="90px"
+                  height="90px"
+                />
               </Box>
 
               <Box>
                 <Typography variant="h4" gutterBottom>
-                  Dana Customer Center
+                  {detail?.name_2}
                 </Typography>
 
                 <Box display="flex" gap="10px" alignItems="center">
-                  <Chip label="Floor L1 · Room 105" />
-                  <Typography>·</Typography>
-                  <Typography>Next to elevators</Typography>
+                  <Chip label={`Floor: ${detail?.floor}`} />{" "}
+                  <Chip label={`Area: ${detail?.area}`} />
                 </Box>
               </Box>
             </Box>
@@ -128,12 +134,7 @@ function Page({ handleClose }) {
                 <Typography fontWeight="bold" gutterBottom>
                   About
                 </Typography>
-                <Typography>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Nulla vero quaerat voluptate praesentium inventore accusamus
-                  quisquam est ea alias ipsa voluptatibus, dignissimos eaque
-                  sunt, veniam distinctio laboriosam, dicta quia. Praesentium?
-                </Typography>
+                <Typography>{detail?.description}</Typography>
               </CardContent>
             </Card>
 
@@ -142,10 +143,7 @@ function Page({ handleClose }) {
                 <Typography fontWeight="bold" gutterBottom>
                   Location
                 </Typography>
-                <Typography>
-                  Full-service marketing agency specializing in digital
-                  transformation.
-                </Typography>
+                <Typography>{detail?.address}</Typography>
               </CardContent>
             </Card>
           </Grid>
@@ -157,15 +155,21 @@ function Page({ handleClose }) {
                 </Typography>
 
                 <Box display="flex" justifyContent="center" pt="10px">
-                  <QRCodeSVG value="https://reactjs.org/" />
+                  {false ? (
+                    <QRCodeSVG value={`tel:${detail?.phone}`} />
+                  ) : detail?.email ? (
+                    <QRCodeSVG value={`mailto:${detail?.email}`} />
+                  ) : null}
                 </Box>
 
-                <Typography align="center" mt="15px" gutterBottom>
-                  or
-                </Typography>
+                {(detail?.email || detail?.phone) && (
+                  <Typography align="center" mt="15px" gutterBottom>
+                    or
+                  </Typography>
+                )}
 
-                <Typography align="center">email@gmail.com</Typography>
-                <Typography align="center">(555) 123-4567</Typography>
+                <Typography align="center">{detail?.email}</Typography>
+                <Typography align="center">{detail?.phone}</Typography>
               </CardContent>
             </Card>
           </Grid>

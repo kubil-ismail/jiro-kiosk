@@ -10,8 +10,22 @@ import {
 import React from "react";
 import Detail from "../components/pages/Detail";
 
+export const renderArea = (area) => {
+  return area?.map((_item, key, arr) => {
+    if (arr.length > 1) {
+      if (arr.length - 1 === key) {
+        return _item;
+      }
+      return `${_item}, `;
+    }
+
+    return _item;
+  });
+};
+
 function OfficeList({ offices }) {
   const [openFullscreen, setOpenFullscreen] = React.useState(false);
+  const [openData, setOpenData] = React.useState(null);
 
   return (
     <Box height="85vh" pb="50px" overflow="scroll" className="scrollbar">
@@ -32,7 +46,10 @@ function OfficeList({ offices }) {
             <Card elevation={0} variant="outlined" sx={{ mb: "10px" }}>
               <CardActionArea
                 sx={{ p: "15px" }}
-                onClick={() => setOpenFullscreen(true)}
+                onClick={() => {
+                  setOpenFullscreen(true);
+                  setOpenData(item);
+                }}
               >
                 <Grid container justifyContent="space-between">
                   <Grid size={1}>
@@ -40,16 +57,27 @@ function OfficeList({ offices }) {
                       sx={{
                         width: "64px",
                         height: "64px",
-                        background: "#4bb8a2",
+                        background: item.background,
                         borderRadius: "8px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
                       }}
-                    />
+                    >
+                      <Box
+                        component="img"
+                        sx={{ objectFit: "contain" }}
+                        src={item?.logo}
+                        width="60px"
+                        height="60px"
+                      />
+                    </Box>
                   </Grid>
                   <Grid size={10.8}>
                     <Box px="20px">
                       <Typography variant="h6">{item.name}</Typography>
                       <Typography>
-                        Floor {item?.floor} - Room {item?.roomNumber}
+                        Floor {item?.floor} - Area {renderArea(item.area)}
                       </Typography>
                     </Box>
                   </Grid>
@@ -65,6 +93,7 @@ function OfficeList({ offices }) {
           handleClose={() => {
             setOpenFullscreen(false);
           }}
+          detail={openData}
         />
       </Dialog>
     </Box>

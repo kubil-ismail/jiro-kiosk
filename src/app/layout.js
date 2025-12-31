@@ -90,6 +90,8 @@ export default function RootLayout({ children }) {
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
         <meta name="theme-color" content="#ffffff"></meta>
+
+        <title>Biomedical Campuss</title>
       </head>
       <body>
         <AppRouterCacheProvider>

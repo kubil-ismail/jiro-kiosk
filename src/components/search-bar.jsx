@@ -42,6 +42,7 @@ function SearchBar({ onChange, value }) {
         fullWidth
         placeholder="Search offices..."
         onChange={(e) => onChange(e.target.value)}
+        // onSubmit={() => }
         // onFocus={resetTimer}
         // onTouchStart={resetTimer}
         value={value}

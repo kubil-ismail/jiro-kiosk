@@ -1,6 +1,7 @@
 import { Box, InputAdornment, TextField, Typography } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React from "react";
+import posthog from "posthog-js";
 
 const IDLE_TIMEOUT = 60000; // 1 minute
 
@@ -21,6 +22,10 @@ function SearchBar({ onChange, value }) {
 
         setSecondsRemaining(remaining);
         if (remaining === 0) {
+          posthog.capture("search_auto_reset", {
+            search_query: value,
+            timeout_seconds: IDLE_TIMEOUT / 1000,
+          });
           onChange("");
 
           return () => clearInterval(interval);
@@ -41,7 +46,15 @@ function SearchBar({ onChange, value }) {
       <TextField
         fullWidth
         placeholder="Search offices..."
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => {
+          const newValue = e.target.value;
+          if (newValue.length > 0 && value.length === 0) {
+            posthog.capture("search_performed", {
+              search_query: newValue,
+            });
+          }
+          onChange(newValue);
+        }}
         // onSubmit={() => }
         // onFocus={resetTimer}
         // onTouchStart={resetTimer}

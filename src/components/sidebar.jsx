@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Button, Typography } from "@mui/material";
+import posthog from "posthog-js";
 
 function Sidebar({ floors, value, onChange }) {
   return (
@@ -46,7 +47,13 @@ function Sidebar({ floors, value, onChange }) {
                   boxShadow: "#fab83487 2.6px 2.6px 2.6px",
                 },
               }}
-              onClick={() => onChange(item)}
+              onClick={() => {
+                  posthog.capture("floor_selected", {
+                    floor: item,
+                    previous_floor: value,
+                  });
+                  onChange(item);
+                }}
               fullWidth
             >
               {item}

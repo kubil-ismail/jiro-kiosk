@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import Detail from "../components/pages/Detail";
+import posthog from "posthog-js";
 
 export const renderArea = (area) => {
   return area?.map((_item, key, arr) => {
@@ -47,6 +48,13 @@ function OfficeList({ offices }) {
               <CardActionArea
                 sx={{ p: "15px" }}
                 onClick={() => {
+                  posthog.capture("office_card_clicked", {
+                    office_name: item.name,
+                    office_company: item.company,
+                    office_floor: item.floor,
+                    office_room_number: item.roomNumber,
+                    office_area: item.area,
+                  });
                   setOpenFullscreen(true);
                   setOpenData(item);
                 }}

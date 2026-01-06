@@ -14,6 +14,7 @@ import React from "react";
 import KeyboardBackspaceRoundedIcon from "@mui/icons-material/KeyboardBackspaceRounded";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { QRCodeSVG } from "qrcode.react";
+import posthog from "posthog-js";
 
 const IDLE_TIMEOUT = 120000; // 2 minute
 
@@ -21,6 +22,30 @@ function Page({ handleClose, detail }) {
   const [secondsRemaining, setSecondsRemaining] = React.useState(120);
   // eslint-disable-next-line react-hooks/purity
   const [lastInteraction] = React.useState(Date.now());
+  const hasTrackedView = React.useRef(false);
+
+  // Track office detail viewed on first render
+  if (!hasTrackedView.current && detail) {
+    const hasQrCode = !!detail.email || !!detail.phone;
+    posthog.capture("office_detail_viewed", {
+      office_name: detail.name,
+      office_name_2: detail.name_2,
+      office_floor: detail.floor,
+      office_area: detail.area,
+      has_email: !!detail.email,
+      has_phone: !!detail.phone,
+    });
+
+    // Track QR code display if contact info is available
+    if (hasQrCode) {
+      posthog.capture("qr_code_displayed", {
+        office_name: detail.name,
+        qr_type: detail.email ? "email" : "phone",
+        contact_value: detail.email || detail.phone,
+      });
+    }
+    hasTrackedView.current = true;
+  }
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -29,6 +54,11 @@ function Page({ handleClose, detail }) {
       setSecondsRemaining(remaining);
 
       if (remaining === 0) {
+        posthog.capture("office_detail_auto_close", {
+          office_name: detail?.name,
+          office_name_2: detail?.name_2,
+          timeout_seconds: IDLE_TIMEOUT / 1000,
+        });
         handleClose();
 
         return () => clearInterval(interval);
@@ -57,7 +87,14 @@ function Page({ handleClose, detail }) {
             textTransform: "capitalize",
             px: "30px",
           }}
-          onClick={handleClose}
+          onClick={() => {
+            posthog.capture("office_detail_back_clicked", {
+              office_name: detail?.name,
+              office_name_2: detail?.name_2,
+              time_spent_seconds: (IDLE_TIMEOUT - secondsRemaining * 1000) / 1000,
+            });
+            handleClose();
+          }}
           startIcon={<KeyboardBackspaceRoundedIcon />}
         >
           Back
